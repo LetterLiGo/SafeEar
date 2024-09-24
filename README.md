@@ -5,7 +5,7 @@
 [![CC BY 4.0](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 ![GitHub stars](https://img.shields.io/github/stars/LetterLiGo/SafeEar)
 ![GitHub forks](https://img.shields.io/github/forks/LetterLiGo/SafeEar)
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fsafeearweb.github.io%2FProject%2F)
+![Website](https://img.shields.io/website?url=https://safeearweb.github.io/Project/)
 
 
 By [1] Zhejiang University, [2] Tsinghua University.
