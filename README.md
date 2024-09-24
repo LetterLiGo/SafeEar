@@ -2,7 +2,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2409.09272-b31b1b.svg)](https://arxiv.org/abs/2409.09272)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) 
-[![GitHub license](https://img.shields.io/github/license/LetterLiGo/SafeEar.svg?color=blue)](https://github.com/LetterLiGo/SafeEar/blob/master/LICENSE)
+[![CC BY 4.0](https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 ![GitHub stars](https://img.shields.io/github/stars/LetterLiGo/SafeEar)
 ![GitHub forks](https://img.shields.io/github/forks/LetterLiGo/SafeEar)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fsafeearweb.github.io%2FProject%2F)
