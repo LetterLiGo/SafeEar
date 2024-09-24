@@ -19,7 +19,7 @@ In this paper, we propose SafeEar, a novel framework that aims to detect deepfak
 
 ## 🚀Overall Pipeline
 
-<video src="assert/overall.mp4" controls="controls" width="100%" height="100%" style="margin: 0 auto;display: block;"></video>
+![pipeline](assert/overall.gif)
 
 ## 🔧Installation
 
