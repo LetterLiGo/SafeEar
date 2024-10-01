@@ -24,7 +24,7 @@ einops==0.7.0
 exceptiongroup==1.2.0
 executing==2.0.1
 # Editable install with no version control (fairseq==1.0.0a0)
--e /data5/likai/SpoofD/fairseq-a54021305d6b3c4c5959ac9395135f63202db8f1
+-e fairseq_ours
 fast-bss-eval==0.1.4
 filelock==3.9.0
 fonttools==4.45.0
