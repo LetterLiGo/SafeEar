@@ -7,6 +7,7 @@ import logging
 import os
 import sys
 import tqdm
+sys.path.append('../../fairseq_ours/') # we recommend an abosulte path here.
 import fairseq
 import soundfile as sf
 import torch
