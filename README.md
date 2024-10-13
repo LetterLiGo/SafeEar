@@ -81,7 +81,7 @@ If you find our work helpful, please consider citing:
 @inproceedings{li2024safeear,
   author       = {Li, Xinfeng and Li, Kai and Zheng, Yifan and Yan, Chen and Ji, Xiaoyu, and Xu, Wenyuan},
   title        = {{SafeEar: Content Privacy-Preserving Audio Deepfake Detection}},
-  booktitle    = {Proceedings of the 2024 {ACM} {SIGSAC} Conference on Computer and Communications Security (CCS)
+  booktitle    = {Proceedings of the 2024 {ACM} {SIGSAC} Conference on Computer and Communications Security (CCS)}
   year         = {2024},
 }
 ```
