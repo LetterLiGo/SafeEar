@@ -79,7 +79,7 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     system.load_state_dict(state_dict=state_dict["state_dict"])
     system.cpu()
 
-    to_save = system.audio_model.serialize()
+    to_save = system.detect_model.serialize()
     torch.save(to_save, os.path.join(cfg.exp.dir, cfg.exp.name, "best_model.pth"))
     import wandb
     if wandb.run:
