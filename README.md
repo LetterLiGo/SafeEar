@@ -35,15 +35,21 @@ cd SafeEar/
 2. Create and activate the conda environment:
 
 ```shell
-conda create -n safeear python=3.8 
+conda create -n safeear python=3.9 
 conda activate safeear
 ```
 
-3. Install PyTorch and torchvision following the [official instructions](https://pytorch.org). The code requires `python>=3.8`, `pytorch>=1.11`, `torchvision>=0.13`.
+3. Install PyTorch and torchvision following the [official instructions](https://pytorch.org). The code requires `python=3.9`, `pytorch=1.13`, `torchvision=0.14`.
 
+
+```shell
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
+
+```
 4. Install other dependencies:
 
 ```shell 
+#pip < 24.0 is needed
 pip install -r requirements.txt
 ```
 
