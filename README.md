@@ -13,7 +13,7 @@ By [1] Zhejiang University, [2] Tsinghua University.
 
 This repository is an official implementation of the SafeEar accepted to **ACM CCS 2024** (Core-A*, CCF-A, Big4) .
 
-Please also visit our <a href="https://safeearweb.github.io/Project/">website</a>.
+Please also visit our <a href="https://safeearweb.github.io/Project/">(1) Project Website</a>, <a href="https://zenodo.org/records/14062964">(2) Full CVoiceFake Dataset</a>, and <a href="https://zenodo.org/records/11124319">(3) Sampled CVoiceFake Dataset</a>.
 
 ## ✨Key Highlights:
 
@@ -81,7 +81,7 @@ python test.py --conf_dir Exps/ASVspoof21/conf.yml
 
 ## 📜Citation
 
-If you find our work helpful, please consider citing:
+If you find our work/code/dataset helpful, please consider citing:
 
 ```
 @inproceedings{li2024safeear,
