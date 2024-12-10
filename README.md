@@ -18,6 +18,7 @@ Please also visit our <a href="https://safeearweb.github.io/Project/">(1) Projec
 ## 🔥News
 
 [2024-12-10]: Fixed all the bugs for training and test, and uploaded the files for data generation `datas/`.
+
 [2024-12-01]: Uploaded the checkpoint for data generation `datas/`.
 
 ## ✨Key Highlights:
