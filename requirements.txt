@@ -108,12 +108,9 @@ thop==0.1.1.post2209072238
 threadpoolctl==3.5.0
 timm==0.9.11
 tomli==2.0.1
-torch==1.13.0+cu116
 torch-mir-eval==0.4
 torch-optimizer==0.3.0
-torchaudio==0.13.0+cu116
 torchmetrics==1.2.0
-torchvision==0.14.0+cu116
 tqdm==4.66.1
 traitlets==5.14.1
 triton==2.0.0
@@ -124,3 +121,4 @@ wcwidth==0.2.12
 Werkzeug==3.0.2
 yarl==1.9.3
 zipp==3.17.0
+npy_append_array==0.9.16

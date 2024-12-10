@@ -78,7 +78,6 @@ def dump_feature(reader,audio_dir,save_dir):
     for audio_file in tqdm.tqdm(audio_files):
         releative_path = audio_file.relative_to(audio_dir).with_suffix(".npy")
         save_path = save_dir / releative_path
-        import pdb; pdb.set_trace()
         if not save_path.parent.exists():
             save_path.parent.mkdir(parents=True)
         
@@ -96,11 +95,11 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("audio_dir", default="/home/lxf/Documents/xinfeng/datasets/ASVSpoof2019")
-    parser.add_argument("save_dir", default="/home/lxf/Documents/xinfeng/datasets/ASVSpoof2019_Hubert_L9_test")
-    parser.add_argument("ckpt_path", default="/home/lxf/Documents/xinfeng/model_zoo/hubert")
-    parser.add_argument("layer", type=int, default=9)
-    parser.add_argument("--max_chunk", type=int, default=1600000)
+    parser.add_argument("audio_dir", nargs="?", default="datasets/ASVSpoof2019", help="Directory containing audio files")
+    parser.add_argument("save_dir", nargs="?", default="datasets/ASVSpoof2019_Hubert_L9", help="Directory to save extracted features")
+    parser.add_argument("ckpt_path", nargs="?", default="../model_zoos/hubert_base_ls960.pt", help="Path to the checkpoint file")
+    parser.add_argument("layer", nargs="?", type=int, default=9, help="Layer number to extract features from")
+    parser.add_argument("--max_chunk", type=int, default=1600000, help="Maximum chunk size for processing")
     args = parser.parse_args()
     logger.info(args)
 

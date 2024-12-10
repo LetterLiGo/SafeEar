@@ -49,7 +49,7 @@ pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --e
 4. Install other dependencies:
 
 ```shell 
-#pip < 24.0 is needed
+pip install pip==24.0
 pip install -r requirements.txt
 ```
 
@@ -58,6 +58,30 @@ pip install -r requirements.txt
 ![](assert/ASVSpoof-results.png)
 ### Speech Recognition Performance
 ![](assert/exp1.png)
+
+## Data preparation
+
+### AVSpoof 2019 & 2021
+
+Please download the [ASVspoof 2019](https://datashare.is.ed.ac.uk/handle/10283/3336) and [ASVspoof 2021](https://www.asvspoof.org/index2021.html) datasets and extract them to the `datas/datasets` directory.
+
+```shell
+datas/datasets/ASVspoof2019
+datas/datasets/ASVspoof2021
+```
+
+#### Generate the Hubert L9 feature files
+
+```shell
+cd model_zoos
+wget https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt
+
+cd ../datas
+# Generate the Hubert L9 feature files for ASVspoof 2019
+python dump_hubert_avg_feature.py datasets/ASVSpoof2019 datasets/ASVSpoof2019_Hubert_L9
+# Generate the Hubert L9 feature files for ASVspoof 2021
+python dump_hubert_avg_feature.py datasets/ASVSpoof2021 datasets/ASVSpoof2021_Hubert_L9
+```
 
 ## 📚Training
 
