@@ -75,7 +75,7 @@ datas/datasets/ASVspoof2021
 ```shell
 cd model_zoos
 wget https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt
-
+wget https://cloud.tsinghua.edu.cn/f/413a0cd2e6f749eea956/?dl=1
 cd ../datas
 # Generate the Hubert L9 feature files for ASVspoof 2019
 python dump_hubert_avg_feature.py datasets/ASVSpoof2019 datasets/ASVSpoof2019_Hubert_L9
