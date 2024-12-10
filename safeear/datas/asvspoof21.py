@@ -54,7 +54,6 @@ class ASVSppof2021(Dataset):
         super().__init__()
         root, self.lines = get_path_iterator(tsv_path)
         self.feat_dir = Path(feat_dir)
-        print(len(self.lines))
         _, self.sr = torchaudio.load(root + "/" + self.lines[0].split('\t')[0])
         self.max_len = max_len
         self.is_train = is_train
@@ -229,9 +228,11 @@ class DataClass:
             raise ValueError(f"Unknown mode: {mode}.")
 
 class DataModule(LightningDataModule):
-    def __init__(self, DataClass, batch_size, num_workers, pin_memory):
+    def __init__(self, DataClass_dict, batch_size, num_workers, pin_memory):
         super().__init__()
         self.save_hyperparameters(logger=False)
+        DataClass_dict.pop("_target_")
+        self.dataset_select = DataClass(**DataClass_dict)
 
         self.data_train: Dataset = None
         self.data_val: Dataset = None
@@ -249,9 +250,9 @@ class DataModule(LightningDataModule):
         """
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            self.data_train = self.hparams.DataClass("train")
-            self.data_val = self.hparams.DataClass("val")
-            self.data_test = self.hparams.DataClass("test")
+            self.data_train = self.dataset_select("train")
+            self.data_val = self.dataset_select("val")
+            self.data_test = self.dataset_select("test")
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(

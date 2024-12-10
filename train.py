@@ -25,6 +25,7 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     # instantiate datamodule
     print_only(f"Instantiating datamodule <{cfg.datamodule._target_}>")
     datamodule: LightningDataModule = hydra.utils.instantiate(cfg.datamodule)
+    datamodule.setup()
     
     # instantiate decouple model
     print_only(f"Instantiating decouple model <{cfg.decouple_model._target_}>")
@@ -44,7 +45,6 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         decouple_model=decouple_model,
         detect_model=detect_model,
     )
-    import pdb; pdb.set_trace()
     # instantiate callbacks
     callbacks: List[Callback] = []
     if cfg.get("early_stopping"):
@@ -75,12 +75,6 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     with open(os.path.join(cfg.exp.dir, cfg.exp.name, "best_k_models.json"), "w") as f:
         json.dump(best_k, f, indent=0)
 
-    state_dict = torch.load(checkpoint.best_model_path)
-    system.load_state_dict(state_dict=state_dict["state_dict"])
-    system.cpu()
-
-    to_save = system.detect_model.serialize()
-    torch.save(to_save, os.path.join(cfg.exp.dir, cfg.exp.name, "best_model.pth"))
     import wandb
     if wandb.run:
         print_only("Closing wandb!")

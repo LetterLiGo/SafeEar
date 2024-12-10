@@ -15,6 +15,12 @@ This repository is an official implementation of the SafeEar accepted to **ACM C
 
 Please also visit our <a href="https://safeearweb.github.io/Project/">(1) Project Website</a>, <a href="https://zenodo.org/records/14062964">(2) Full CVoiceFake Dataset</a>, and <a href="https://zenodo.org/records/11124319">(3) Sampled CVoiceFake Dataset</a>.
 
+## 🔥News
+
+[2024-12-10]: Fixed all the bugs for training and test, and uploaded the files for data generation `datas/`.
+
+[2024-12-01]: Uploaded the checkpoint for data generation `datas/`.
+
 ## ✨Key Highlights:
 
 In this paper, we propose SafeEar, a novel framework that aims to detect deepfake audios without relying on accessing the speech content within. Our key idea is to devise a neural audio codec into a novel decoupling model that well separates the semantic and acoustic information from audio samples, and only use the acoustic information (e.g., prosody and timbre) for deepfake detection. In this way, no semantic content will be exposed to the detector. To overcome the challenge of identifying diverse deepfake audio without semantic clues, we enhance our deepfake detector with multi-head self-attention and codec augmentation. Extensive experiments conducted on four benchmark datasets demonstrate SafeEar’s effectiveness in detecting various deepfake techniques with an equal error rate (EER) down to 2.02%. Simultaneously, it shields five-language speech content from being deciphered by both machine and human auditory analysis, demonstrated by word error rates (WERs) all above 93.93% and our user study. Furthermore, our benchmark constructed for anti-deepfake and anti-content recovery evaluation helps provide a basis for future research in the realms of audio privacy preservation and deepfake detection.
@@ -49,7 +55,7 @@ pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --e
 4. Install other dependencies:
 
 ```shell 
-#pip < 24.0 is needed
+pip install pip==24.0
 pip install -r requirements.txt
 ```
 
@@ -58,6 +64,30 @@ pip install -r requirements.txt
 ![](assert/ASVSpoof-results.png)
 ### Speech Recognition Performance
 ![](assert/exp1.png)
+
+## Data preparation
+
+### AVSpoof 2019 & 2021
+
+Please download the [ASVspoof 2019](https://datashare.is.ed.ac.uk/handle/10283/3336) and [ASVspoof 2021](https://www.asvspoof.org/index2021.html) datasets and extract them to the `datas/datasets` directory.
+
+```shell
+datas/datasets/ASVspoof2019
+datas/datasets/ASVspoof2021
+```
+
+#### Generate the Hubert L9 feature files
+
+```shell
+cd model_zoos
+wget https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt
+wget https://cloud.tsinghua.edu.cn/f/413a0cd2e6f749eea956/?dl=1
+cd ../datas
+# Generate the Hubert L9 feature files for ASVspoof 2019
+python dump_hubert_avg_feature.py datasets/ASVSpoof2019 datasets/ASVSpoof2019_Hubert_L9
+# Generate the Hubert L9 feature files for ASVspoof 2021
+python dump_hubert_avg_feature.py datasets/ASVSpoof2021 datasets/ASVSpoof2021_Hubert_L9
+```
 
 ## 📚Training
 
