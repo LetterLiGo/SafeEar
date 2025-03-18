@@ -17,7 +17,7 @@ Please also visit our <a href="https://safeearweb.github.io/Project/">(1) Projec
 
 ## 🔥News
 
-[2024-12-01]: Supported the batch testing for ASVspoof 2019 and 2021, fixed some bugs for datasets and trainer.
+[2025-03-18]: Supported the batch testing for ASVspoof 2019 and 2021, fixed some bugs for datasets and trainer.
 
 [2024-12-10]: Fixed all the bugs for training and test, and uploaded the files for data generation `datas/`.
 
