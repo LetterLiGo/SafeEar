@@ -5,9 +5,9 @@ datamodule:
   pin_memory: true
   DataClass_dict:
     _target_: safeear.datas.asvspoof19.DataClass
-    train_path: ["datas/ASVSpoof2019/train.tsv", "datas/ASVSpoof2019/ASVspoof2019.LA.cm.train.trn.txt", "datas/datasets/ASVSpoof2019_Hubert_L9/LA/ASVspoof2019_LA_train/flac"]
-    val_path: ["datas/ASVSpoof2019/dev.tsv", "datas/ASVSpoof2019/ASVspoof2019.LA.cm.dev.trl.txt", "datas/datasets/ASVSpoof2019_Hubert_L9/LA/ASVspoof2019_LA_dev/flac"]
-    test_path: ["datas/ASVSpoof2019/eval.tsv", "datas/ASVSpoof2021/ASVspoof2021.LA.cm.eval.trl.txt", "datas/datasets/ASVSpoof2021_Hubert_L9"]
+    train_path: ["datas/ASVSpoof2019/train.tsv", "datas/ASVSpoof2019/ASVspoof2019.LA.cm.train.trn.txt", "datas/datasets/ASVSpoof2019_Hubert_L9/ASVspoof2019_LA_train/flac"]
+    val_path: ["datas/ASVSpoof2019/dev.tsv", "datas/ASVSpoof2019/ASVspoof2019.LA.cm.dev.trl.txt", "datas/datasets/ASVSpoof2019_Hubert_L9/ASVspoof2019_LA_dev/flac"]
+    test_path: ["datas/ASVSpoof2019/eval.tsv", "datas/ASVSpoof2019/ASVspoof2019.LA.cm.eval.trl.txt", "datas/datasets/ASVSpoof2019_Hubert_L9/ASVspoof2019_LA_eval/flac"]
     max_len: 64600
 
 decouple_model:
@@ -77,8 +77,8 @@ logger:
 
 trainer:
   _target_: pytorch_lightning.Trainer
-  devices: [4]
-  max_epochs: 5
+  devices: [0]
+  max_epochs: 500
   sync_batchnorm: true
   default_root_dir: ${exp.dir}/${exp.name}/
   accelerator: gpu

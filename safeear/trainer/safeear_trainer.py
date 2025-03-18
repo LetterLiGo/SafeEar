@@ -33,10 +33,18 @@ class SafeEarTrainer(pl.LightningModule):
         self.val_score_loader = []
         self.eval_index_loader = []
         self.eval_score_loader = []
+        self.eval_filename_loader = []
         self.default_monitor = "val_eer"
 
     def forward(self, batch, is_train=True):
-        x, feat, target = batch
+        if is_train:
+            x, feat, target = batch
+        else:
+            if len(batch) == 4:
+                x, feat, target, audio_path = batch
+            else:
+                x, feat, target = batch
+                audio_path = None
         x_wav = get_input(x)
         with torch.no_grad():
             self.decouple_model.eval()
@@ -47,12 +55,12 @@ class SafeEarTrainer(pl.LightningModule):
             onehot_target = torch.eye(2).to(self.device)[target, :]
             raw_logits = torch.softmax(raw_logits, dim=-1)
             raw_former_loss_ = self.detect_loss(raw_logits,onehot_target)
+            return raw_former_loss_, raw_logits, target
         else:
             raw_logits = torch.softmax(raw_logits, dim=-1)[:, 0]
             raw_former_loss_ = 0
-
-        return raw_former_loss_, raw_logits, target
-
+            return audio_path, raw_former_loss_, raw_logits, target
+        
     def training_step(self, batch, batch_idx):
         raw_opt = self.optimizers()
         
@@ -72,7 +80,7 @@ class SafeEarTrainer(pl.LightningModule):
             logger=True)
     
     def validation_step(self, batch, batch_idx):
-        raw_former_loss_, raw_logits, target = self(batch, is_train=False)
+        _, raw_former_loss_, raw_logits, target = self(batch, is_train=False)
         
         self.val_index_loader.append(target)
         self.val_score_loader.append(raw_logits)
@@ -162,6 +170,7 @@ class SafeEarTrainer(pl.LightningModule):
         
         self.eval_index_loader.clear()  # free memory
         self.eval_score_loader.clear()  # free memory
+        self.eval_filename_loader.clear()  # free memory
         
     def configure_optimizers(self):
         optimizer_rawformer = torch.optim.AdamW(self.detect_model.parameters(), lr=self.lr_raw_former, weight_decay=1e-4)
