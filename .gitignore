@@ -160,6 +160,8 @@ cython_debug/
 #.idea/
 model_zoos/*
 Exps/*
-datas/datasets/ASVSpoof2019
-datas/datasets/ASVSpoof2019_Hubert_L9
-datas/datasets/ASVSpoof2021_Hubert_L9
+datas/datasets
+datas/ASVSpoof2019/LA
+datas/ASVSpoof2021/ASVspoof2021_LA_eval
+datas/ASVSpoof2021/keys
+create_tsv.py

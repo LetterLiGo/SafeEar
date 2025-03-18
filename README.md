@@ -17,6 +17,8 @@ Please also visit our <a href="https://safeearweb.github.io/Project/">(1) Projec
 
 ## 🔥News
 
+[2025-03-18]: Supported the batch testing for ASVspoof 2019 and 2021, fixed some bugs for datasets and trainer.
+
 [2024-12-10]: Fixed all the bugs for training and test, and uploaded the files for data generation `datas/`.
 
 [2024-12-01]: Uploaded the checkpoint for data generation `datas/`.
@@ -79,9 +81,10 @@ datas/datasets/ASVspoof2021
 #### Generate the Hubert L9 feature files
 
 ```shell
+mkdir model_zoos
 cd model_zoos
 wget https://dl.fbaipublicfiles.com/hubert/hubert_base_ls960.pt
-wget https://cloud.tsinghua.edu.cn/f/413a0cd2e6f749eea956/?dl=1
+wget https://cloud.tsinghua.edu.cn/f/413a0cd2e6f749eea956/?dl=1 -O SpeechTokenizer.pt
 cd ../datas
 # Generate the Hubert L9 feature files for ASVspoof 2019
 python dump_hubert_avg_feature.py datasets/ASVSpoof2019 datasets/ASVSpoof2019_Hubert_L9
@@ -105,8 +108,16 @@ python train.py --conf_dir config/train21.yaml
 To evaluate a model on one or more GPUs, specify the `CUDA_VISIBLE_DEVICES`, `dataset`, `model` and `checkpoint`:
 
 ```shell
-python test.py --conf_dir Exps/ASVspoof19/conf.yml
-python test.py --conf_dir Exps/ASVspoof21/conf.yml
+python test.py --conf_dir Exps/ASVspoof19/config.yaml
+python test.py --conf_dir Exps/ASVspoof21/config.yaml
+```
+
+## Bugs and Issues
+
+If you meet `RuntimeError: Failed to load audio from <_io.BytesIO object at 0x7f45cb978f90>`, please use the following command to fix it:
+
+```shell
+conda install -c anaconda 'ffmpeg<4.4'
 ```
 
 ## 📜Citation

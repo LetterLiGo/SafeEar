@@ -6,9 +6,11 @@
 import logging
 import os
 import sys
-
+import warnings
+warnings.filterwarnings('ignore')
 import tqdm
 import fairseq
+import librosa
 import soundfile as sf
 import torch
 import torch.nn.functional as F
@@ -41,7 +43,7 @@ class HubertFeatureReader(object):
         logger.info(f" max_chunk = {self.max_chunk}")
 
     def read_audio(self, path, ref_len=None):
-        wav, sr = sf.read(path)
+        wav, sr = librosa.load(path, sr=None)
         assert sr == self.task.cfg.sample_rate, sr
         if wav.ndim == 2:
             wav = wav.mean(-1)

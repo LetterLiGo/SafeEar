@@ -1,6 +1,8 @@
 import importlib
 import json
 import os
+import warnings
+warnings.filterwarnings("ignore")
 from typing import Any, Dict, List, Optional, Tuple
 import argparse
 import pytorch_lightning as pl

@@ -92,7 +92,7 @@ class ASVSppof2019(Dataset):
         target = 1 if waveform_info == 'spoof' else 0 
         
         if avg_hubert_feat.ndim == 3:
-            avg_hubert_feat = avg_hubert_feat.permute(2, 1, 0).squeeze(0)  # [T,1,768] -> [1,T,768]
+            avg_hubert_feat = avg_hubert_feat.permute(2, 1, 0).squeeze(1)  # [T,1,768] -> [1,T,768]
         else:
             avg_hubert_feat = avg_hubert_feat.permute(1, 0)  # [T,768] -> [768, T]
         
@@ -106,13 +106,27 @@ class ASVSppof2019(Dataset):
                 return audio[:, st:ed], avg_hubert_feat, target
             else:
                 return audio[:, st:ed], avg_hubert_feat[:, feat_st:feat_st + feat_duration], target
+            
+        if self.is_train == False and audio.shape[1] > self.max_len:
+            st = 0
+            feat_st = 0
+            ed = st + self.max_len
+            if avg_hubert_feat[:, feat_st:feat_st + feat_duration].shape[1] < feat_duration:
+                avg_hubert_feat = avg_hubert_feat[:, feat_st:feat_st + feat_duration]
+                avg_hubert_feat = torch.nn.functional.pad(avg_hubert_feat, (0, feat_duration - avg_hubert_feat.shape[1]), "constant", 0)
+                return audio[:, st:ed], avg_hubert_feat, target
+            else:
+                return audio[:, st:ed], avg_hubert_feat[:, feat_st:feat_st + feat_duration], target, str(audio_path)
 
-        if self.is_train and audio.shape[1] < self.max_len:
+        if audio.shape[1] < self.max_len:
             audio_pad_length = self.max_len - audio.shape[1]
             audio = torch.nn.functional.pad(audio, (0, audio_pad_length), "constant", 0)
             
-        if self.is_train and avg_hubert_feat.shape[1] < feat_duration:
+        if avg_hubert_feat.shape[1] < feat_duration:
             avg_hubert_feat = torch.nn.functional.pad(avg_hubert_feat, (0, feat_duration - avg_hubert_feat.shape[1]), "constant", 0)
+
+        if self.is_train == False:
+            return audio, avg_hubert_feat, target, str(audio_path)
 
         return audio, avg_hubert_feat, target
     
@@ -187,6 +201,7 @@ class DataClass:
             self.test_path[0], 
             self.test_path[1], 
             self.test_path[2],
+            self.max_len,
             is_train=False
         )
     def __call__(self, mode: str) -> ASVSppof2019:

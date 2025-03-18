@@ -64,7 +64,6 @@ networkx==3.0
 numba==0.59.1
 numpy==1.23.5
 nvidia-ml-py==12.535.133
-omegaconf==2.0.6
 opencv-python==4.9.0.80
 packaging==23.2
 parso==0.8.3
